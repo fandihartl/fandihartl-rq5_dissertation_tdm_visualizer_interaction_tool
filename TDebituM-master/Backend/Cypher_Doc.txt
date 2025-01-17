@@ -1,0 +1,43 @@
+match (me:Party {name:"Mechanical Engineering"}), (se:Party {name:"Software Engineering"}), (ee:Party {name:"Electronical Engineering"}), (ma:Party {name:"Management"}), (ie:Party {name:"Industrial Engineering"}), (pd:Party {name:"Purchasing Department"}), (ass:Party {name:"Assembly"})
+
+MERGE (company:Company {name:"Wittenstein"})
+MERGE (domain:Domain {name:"Automation"})
+MERGE (company)-[:IS_IN]->(domain)
+MERGE (p:Person {name: 51})
+ON CREATE
+  SET p.heardOfTD= false,p.experience="2-9",p.discipline="Service"
+MERGE (p)-[:WORKS_AT {POSITION:"Service",leadingPosition:false}]->(company)
+
+MERGE (incident:TDIncident {name:"Manchmal müssen Vorrichtungen für die"})
+
+MERGE (tdtyp:TDType {name:"Process TD"})
+MERGE (tdsubtyp:TDSubtype {name:"Lack of standardized process"})
+MERGE (cause:Cause {name:"Assebly department not involved in product design"})
+MERGE (causeOld:Cause {name:"Late change of physical parts  and technology used"})
+MERGE (measuresoll: MeasureSoll {name:"Involve assembly department in product design"})
+MERGE (currentstate:CurrentState { name:"Delivery time delay", status: "solved" })
+MERGE (measureist:MeasureIst {name:"nothing"})
+
+MERGE (p)-[:REPORTED]->(incident)
+CREATE (incident)<-[:CAUSES]-(cause)
+MERGE (causeOld)-[:LEADED_TO]->(cause)
+//MERGE (cause)-[:REQUIRES]->(measuresoll)
+MERGE (tdsubtyp)-[:BELONGS_TO]->(tdtyp)
+MERGE (cause)-[:CLASSIFIED_IN]->(tdsubtyp)
+MERGE (currentstate)<-[:IS_NOW_IN]-(incident)
+MERGE (measureist)-[:RESULTING_IN]->(currentstate)
+MERGE (cause)<-[:SOLVED]-(measureist)
+
+MERGE (ee)-[:INITIATES]->(incident)
+MERGE (me)-[:INITIATES]->(incident)
+
+MERGE (incident)-[:AFFECTS]-> (pd)
+MERGE (incident)-[:AFFECTS]-> (ee)
+MERGE (incident)-[:AFFECTS]-> (me)
+
+MERGE (ee)-[:INITIATES]->(cause)
+MERGE (me)-[:INITIATES]->(cause)
+
+MERGE (cause)-[:AFFECTS]-> (pd)
+MERGE (cause)-[:AFFECTS]-> (ee)
+MERGE (cause)-[:AFFECTS]-> (me)

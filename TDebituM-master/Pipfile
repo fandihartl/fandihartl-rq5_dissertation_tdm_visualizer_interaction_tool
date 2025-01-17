@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+neo4j = "*"
+dash = "*"
+pandas = "*"
+py2neo = "*"
+plotly = "*"
+dash-bootstrap-components = "*"
+dash-cytoscape = "==0.2.0"
+dash-auth = "*"
+gunicorn = "*"
+openpyxl = "*"
+
+[dev-packages]
+autopep8 = "*"
+pylint = "*"
+ipykernel = "*"
+openpyxl = "*"
+
+[requires]
+python_version = "3.9"
