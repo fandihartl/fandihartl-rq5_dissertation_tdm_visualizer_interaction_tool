@@ -75,3 +75,15 @@ This project is licensed under the MIT License. See LICENSE for details.
 - Technical advice during design and implementation: Two senior programmers in a German mid-sized software company 
 - Evaluation: industrial and academic helped to refine and validate the tool
 - Funding: The German Research Foundation (DFG)
+
+## Citation
+Please use the following bibtex entry:
+@inproceedings{Bi2023icps
+  author    = {Bi, Fandi and Vogel-Heuser, Birgit and Sapera, Edgar Benet},
+  title     = {Towards an Interdisciplinary Technical Debt Interaction and Visualization Tool},
+  pages     = {1--8},
+  publisher = {IEEE},
+  booktitle = {IEEE International Conference on Industrial Cyber-Physical Systems (ICPS)},
+  year      = {2023},
+  doi       = {10.1109/ICPS58381.2023.10128069}
+}
